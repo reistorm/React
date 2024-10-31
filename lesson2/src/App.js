@@ -7,16 +7,16 @@ import RefExamle from './components/useRef';
 import Show from './components/visible';
 
 function App() {
-  const userName = 'Alex';
+  const userName = 'Maxim';
   return (
     <div>
         <h1>Hello, {userName}</h1>
-        <Counter />
+        {/* <Counter />
         <Show />
         <Show data="Текст и компонента" />
         <Timer />
         <RefExamle />
-        <MessageList />
+        <MessageList /> */}
         <CommentsList />
 
     </div>
