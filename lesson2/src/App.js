@@ -1,4 +1,5 @@
 import './App.css';
+import CommentsList from './components/CommentsList';
 import Counter from './components/counter';
 import MessageList from './components/renderArray';
 import Timer from './components/timer';
@@ -16,6 +17,7 @@ function App() {
         <Timer />
         <RefExamle />
         <MessageList />
+        <CommentsList />
 
     </div>
   );
