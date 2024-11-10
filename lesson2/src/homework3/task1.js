@@ -13,14 +13,14 @@ const TemperatureConverter = () => {
         if(temperatureCelsius) {
             setTemperatureFahrenheit(fromCelsiusToFahrenheit(temperatureCelsius))
         } else if (temperatureFahrenheit) {
-            setTemperatureCelsius(fromFarenheitToCelsius(temperatureFahrenheit))
+            setTemperatureCelsius(fromFahrenheitToCelsius(temperatureFahrenheit))
         }
     }
 
     const fromCelsiusToFahrenheit = (temperatureCelsius) => {
         return (temperatureCelsius * 9 / 5) + 32;
     }
-    const fromFarenheitToCelsius = (temperatureFahrenheit) => {
+    const fromFahrenheitToCelsius = (temperatureFahrenheit) => {
         return (temperatureFahrenheit - 32) * 5 / 9;
     }
 
@@ -50,8 +50,5 @@ const TemperatureConverter = () => {
         
     )
 }
-TemperatureConverter.propTypes = {
-    temperatureCelsius: PropTypes.number.isRequired,
-    temperatureFahrenheit: PropTypes.number.isRequired,
-};
+
 export default TemperatureConverter;

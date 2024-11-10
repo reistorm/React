@@ -31,7 +31,7 @@ export default function TodoList() {
             <TextField id="outlined-basic" label="Задача" variant="outlined" onChange={takeTask} value={task} />
             <Button variant="outlined" onClick={addTask}>Добавить задачу</Button>
             <ul className='todolist card'>
-                {cards.map((el, index=0) => 
+                {cards.map((el, index) => 
                 <li key={index++}>
                     <Card variant="outlined" id={`card${index}`}>{el}
                         <Stack direction="row" spacing={1} onClick={() => deleteTask(el)}>

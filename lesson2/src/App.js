@@ -1,27 +1,28 @@
 import './App.css';
 import { useState, React } from 'react';
 import CommentsList from './components2/CommentsList';
-import Counter from './components2/counter';
-import MessageList from './components2/renderArray';
-import Timer from './components2/timer';
-import RefExamle from './components2/useRef';
-import Show from './components2/visible';
-import InputForm from './components3/form';
-import ParentCounter from './components3/parent';
-import Nav from './components3/header';
-import HoverRating from './components3/rating';
-import BasicList from './components3/superList';
-import Student from './components3/propType';
+// import Counter from './components2/counter';
+// import MessageList from './components2/renderArray';
+// import Timer from './components2/timer';
+// import RefExamle from './components2/useRef';
+// import Show from './components2/visible';
+// import InputForm from './components3/form';
+// import ParentCounter from './components3/parent';
+// import Nav from './components3/header';
+// import HoverRating from './components3/rating';
+// import BasicList from './components3/superList';
+// import Student from './components3/propType';
 import TemperatureConverter from './homework3/task1';
 import TodoList from './homework3/task2';
+import ThemeToggle from './homework5/ThemeToggle';
 // import ArticleList from 'l./lesson4/Rout/ArticleList';
 // import ArticleDetail from 'l./lesson4/Rout/ArticleDetail';
 // import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 // import ProductList from './lesson4/Rout/ProductList';
 // import ProductDetail from './lesson4/Rout/ProductDetail';
-import { Provider } from 'react-redux';
-import store form './store';
-import Counter from './Counter';
+// import { Provider } from 'react-redux';
+// import store from './store';
+// import Counter from './Counter';
 
 
 
@@ -57,6 +58,10 @@ function App() {
           <h1>Домашнее задание 3</h1>
           <TemperatureConverter />
           <TodoList />
+        </BorderComp>
+        <BorderComp>
+          <h1>Домашнее задание 5</h1>
+          <ThemeToggle />
         </BorderComp>
         {
         // Пример использования children 1
@@ -208,272 +213,272 @@ const BorderComp = ({ children, props }) => {
 
 /////////////////Лекция 5 React.Context HOC Redux
 
-// Создаем контекст
-const MessageContext = createContext();
+// // Создаем контекст
+// const MessageContext = createContext();
 
-// компонент GrandGrandGrandChild использует контекст
-function GrandGrandGrandChild() {
-  // используем useContext для доступа к контексту
-  const message = useContext(MessageContext);
+// // компонент GrandGrandGrandChild использует контекст
+// function GrandGrandGrandChild() {
+//   // используем useContext для доступа к контексту
+//   const message = useContext(MessageContext);
 
-  return <span>{message}</span>;
-}
+//   return <span>{message}</span>;
+// }
 
-// компонент GrandParent устанавливает контекст
-function GrandParent() {
-  return (
-    <MessageContext.Provider value="Hello from the top Context">
-      <Parent />
-    </MessageContext.Provider>
-  )
-}
+// // компонент GrandParent устанавливает контекст
+// function GrandParent() {
+//   return (
+//     <MessageContext.Provider value="Hello from the top Context">
+//       <Parent />
+//     </MessageContext.Provider>
+//   )
+// }
 
-// Компонент Parent передает контекст через пропсы
-function Parent() {
-  return <Child />;
-}
+// // Компонент Parent передает контекст через пропсы
+// function Parent() {
+//   return <Child />;
+// }
 
-// Компонент Child передает контекст дальше
-function Child() {
-  return <GrandChild />
-}
+// // Компонент Child передает контекст дальше
+// function Child() {
+//   return <GrandChild />
+// }
 
-// компонент GrandChild передает контекст на последний уровень
-function GrandChild() {
-  return <GrandGrandGrandChild />
-}
-// и далее
+// // компонент GrandChild передает контекст на последний уровень
+// function GrandChild() {
+//   return <GrandGrandGrandChild />
+// }
+// // и далее
 
-// КОрневой компонент
-function App() {
-  return (
-    <div>
-      <h1>Пример использования React.Context</h1>
-      <GrandParent />
-    </div>
-  )
-}
+// // КОрневой компонент
+// function App() {
+//   return (
+//     <div>
+//       <h1>Пример использования React.Context</h1>
+//       <GrandParent />
+//     </div>
+//   )
+// }
 
 
-////////Example 2 поменять цвет текста и цвет кнопки
+// ////////Example 2 поменять цвет текста и цвет кнопки
 
-// 1. Создаем контекст 
-const ThemeContext = createContext();
+// // 1. Создаем контекст 
+// const ThemeContext = createContext();
 
-// Компонент, использующий контекст
-const ThemedButton = () => {
-  // 2. Используем useContext для доступа к контексту
-  const theme = useContext(ThemeContext);
+// // Компонент, использующий контекст
+// const ThemedButton = () => {
+//   // 2. Используем useContext для доступа к контексту
+//   const theme = useContext(ThemeContext);
 
-  return (
-    <button style={{ background: theme.background, color: theme.foreground}}>
-      Themed Button
-    </button>
-  )
-};
+//   return (
+//     <button style={{ background: theme.background, color: theme.foreground}}>
+//       Themed Button
+//     </button>
+//   )
+// };
 
-// Компонент, который устанавливает контекст
-const App() {
-  // 3. Определяем состояние, которое будет передаваться через контекст
-  const [theme, setTheme] = useState({
-    background: 'lightgray',
-    foreground: 'black'
-  });
+// // Компонент, который устанавливает контекст
+// const App() {
+//   // 3. Определяем состояние, которое будет передаваться через контекст
+//   const [theme, setTheme] = useState({
+//     background: 'lightgray',
+//     foreground: 'black'
+//   });
 
-  // 4. Оборачиваем компоненты, которые должны использовать контекст, в провайдер контекста
-  return (
-    <ThemeContext.Provider value={theme}>
-      <div>
-        <h1> Использование React.Context</h1>
-        <ThemedButton />
-        <button
-          onClick={() =>
-            setTheme({
-              background: 'black',
-              foreground: 'white'
-            })
-          }
-          >
-            Сменить тему
-          </button>
-      </div>
-    </ThemeContext.Provider>
-  )
-}
+//   // 4. Оборачиваем компоненты, которые должны использовать контекст, в провайдер контекста
+//   return (
+//     <ThemeContext.Provider value={theme}>
+//       <div>
+//         <h1> Использование React.Context</h1>
+//         <ThemedButton />
+//         <button
+//           onClick={() =>
+//             setTheme({
+//               background: 'black',
+//               foreground: 'white'
+//             })
+//           }
+//           >
+//             Сменить тему
+//           </button>
+//       </div>
+//     </ThemeContext.Provider>
+//   )
+// }
 
 //////Example 3
 
 // Создаем контексты для темы и заметок
-const ThemeContext = createContext();
-const NotesContext = createContext();
+// const ThemeContext = createContext();
+// const NotesContext = createContext();
 
-// Создаем пользовательские хуки для удобства использования контекстов
-const useTheme = () => useContext(ThemeContext);
-const useNotes = () => useContext(NotesContext);
+// // Создаем пользовательские хуки для удобства использования контекстов
+// const useTheme = () => useContext(ThemeContext);
+// const useNotes = () => useContext(NotesContext);
 
-// Компонент, отображающий список заметок
-const NotesList = () => {
-  const { notes } = useNotes();
-  return (
-    <ul>
-      {notes.map((note, index) => (
-        <li key={index}>{note}</li>
-      ))}
-    </ul>
-  );
-};
+// // Компонент, отображающий список заметок
+// const NotesList = () => {
+//   const { notes } = useNotes();
+//   return (
+//     <ul>
+//       {notes.map((note, index) => (
+//         <li key={index}>{note}</li>
+//       ))}
+//     </ul>
+//   );
+// };
 
 // Компонент, позволяющий добавлять заметки
-const NoteInput = () => {
-  const [inputValue, setInputValue] = useState('');
-  const { addNote } = useNotes();
+// const NoteInput = () => {
+//   const [inputValue, setInputValue] = useState('');
+//   const { addNote } = useNotes();
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  }
+//   const handleInputChange = (event) => {
+//     setInputValue(event.target.value);
+//   }
 
-  const handleAddNote = () => {
-    addNote(inputValue);
-    // обнуляем значение
-    setInputValue('');
-  };
+//   const handleAddNote = () => {
+//     addNote(inputValue);
+//     // обнуляем значение
+//     setInputValue('');
+//   };
 
-  return (
-    <div>
-      <input value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleAddNote}>Добавить</button>
-    </div>
-  )
-};
+//   return (
+//     <div>
+//       <input value={inputValue} onChange={handleInputChange} />
+//       <button onClick={handleAddNote}>Добавить</button>
+//     </div>
+//   )
+// };
 
 // Компонент для переключения темы через хук
-const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-  return (
-    <button onClick={toggleTheme}>Нажми, чтобы переключить на {theme === 'light' ? 'Темную' : 'Светлую'} тему </button>
-  )
-};
+// const ThemeToggle = () => {
+//   const { theme, toggleTheme } = useTheme();
+//   return (
+//     <button onClick={toggleTheme}>Нажми, чтобы переключить на {theme === 'light' ? 'Темную' : 'Светлую'} тему </button>
+//   )
+// };
 
-const App = () => {
-  // переключение темы
-  const [ theme, setTheme ] = useState('light');
-  const [ notes, setNotes ] = useState(['Элемент списка 1', 'Элемент списка 2']);
+// const App = () => {
+//   // переключение темы
+//   const [ theme, setTheme ] = useState('light');
+//   const [ notes, setNotes ] = useState(['Элемент списка 1', 'Элемент списка 2']);
 
-  const toggleTheme = () => {
-    // смена темы
-    setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
-  };
+//   const toggleTheme = () => {
+//     // смена темы
+//     setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
+//   };
 
-  const addNote = (note) => {
-    // пробежаться по массиву, собираем старыe note и добавляем новый 
-    setNotes((prevNotes) => [...prevNotes, note]);
-  };
+//   const addNote = (note) => {
+//     // пробежаться по массиву, собираем старыe note и добавляем новый 
+//     setNotes((prevNotes) => [...prevNotes, note]);
+//   };
 
-  return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      // список из произвольных элементов
-      <NotesContext.Provider value={{ notes, addNote}}>
-        <div className='context' style={{ color: theme === 'light' ? 'black' : 'white', 
-        background: theme === 'light' ? 'white' : 'black'}}>
-          <h1>Список</h1>
-          <ThemeToggle />
-          <NotesList />
-          <NoteInput />
-        </div>
-      </NotesContext.Provider>
-    </ThemeContext.Provider>
-  )
-}
+//   return (
+//     <ThemeContext.Provider value={{theme, toggleTheme}}>
+//       // список из произвольных элементов
+//       <NotesContext.Provider value={{ notes, addNote}}>
+//         <div className='context' style={{ color: theme === 'light' ? 'black' : 'white', 
+//         background: theme === 'light' ? 'white' : 'black'}}>
+//           <h1>Список</h1>
+//           <ThemeToggle />
+//           <NotesList />
+//           <NoteInput />
+//         </div>
+//       </NotesContext.Provider>
+//     </ThemeContext.Provider>
+//   )
+// }
 
 
 /////////////HOC компоненты высшего порядка
 
 // HOC для добавления стилей к компоненту WrappedComponent
-const withStyles = (WrappedComponent, styles) => {
-  return (props) => {
-    const newProps = {...props, styles};
-    return <WrappedComponent {...newProps} />
-  };
-};
+// const withStyles = (WrappedComponent, styles) => {
+//   return (props) => {
+//     const newProps = {...props, styles};
+//     return <WrappedComponent {...newProps} />
+//   };
+// };
 
 // Компонент, который будет обернут в стили
-const Button = ({styles}) => {
-  return (
-    <button style={styles}>
-      Click me
-    </button>
-  );
-};
+// const Button = ({styles}) => {
+//   return (
+//     <button style={styles}>
+//       Click me
+//     </button>
+//   );
+// };
 
-const Text = ({styles}) => {
-  return (
-    <p style={styles}>
-      Text
-    </p>
-  );
-};
+// const Text = ({styles}) => {
+//   return (
+//     <p style={styles}>
+//       Text
+//     </p>
+//   );
+// };
 
 // Иcпользуем НОС для добавления стилей к компоненту Button
-const StyledButton = withStyles(Button, { background: 'blue', color: 'white'});
-const StyledText = withStyles(Text, { background: 'gray', color: 'black'});
+// const StyledButton = withStyles(Button, { background: 'blue', color: 'white'});
+// const StyledText = withStyles(Text, { background: 'gray', color: 'black'});
 
 
-const App = () => {
-  return (
-    <div>
-      <h1>Пример Компоненты Высшего порядка (НОС) с функциональными компонентами</h1>
-      <StyledButton />
-      <StyledText />
-    </div>
-  );
-};
+// const App = () => {
+//   return (
+//     <div>
+//       <h1>Пример Компоненты Высшего порядка (НОС) с функциональными компонентами</h1>
+//       <StyledButton />
+//       <StyledText />
+//     </div>
+//   );
+// };
 
 //// НОС для счетчика
 
 // НОС для добавления счетчика к компоненту
 
-const withCounter = (WrappedComponent) => {
-  return (props) => {
-    const [count, setCount] = useState(0);
+// const withCounter = (WrappedComponent) => {
+//   return (props) => {
+//     const [count, setCount] = useState(0);
 
-    const incrementCount = () => {
-      setCount(count + 1);
-    };
+//     const incrementCount = () => {
+//       setCount(count + 1);
+//     };
 
-    const newProps = {
-      count, 
-      incrementCount,
-      ...props,
-    };
+//     const newProps = {
+//       count, 
+//       incrementCount,
+//       ...props,
+//     };
 
-    return <WrappedComponent {...newProps} />
-  };
-};
+//     return <WrappedComponent {...newProps} />
+//   };
+// };
 
 // Компонент, который будет обернут со счетчиком и другими пропсами
-const ClickCounter = ({ count, incrementCount, message }) => {
-  return (
-    <div>
-      <p>{message}</p>
-      <button onClick={incrementCount}>Click me</button>
-      <p>Clicked {count} times</p>
-    </div>
-  );
-};
+// const ClickCounter = ({ count, incrementCount, message }) => {
+//   return (
+//     <div>
+//       <p>{message}</p>
+//       <button onClick={incrementCount}>Click me</button>
+//       <p>Clicked {count} times</p>
+//     </div>
+//   );
+// };
 
 // Используем НОС для добавления счетчика к компоненту ClickCounter
 // и передаем другие пропсы
-const ClickCounterWithCounterAndProps = withCounter(ClickCounter);
+// const ClickCounterWithCounterAndProps = withCounter(ClickCounter);
 
-const App = () => {
-  return (
-    <div>
-      <h1>Пример использования НОС с другими пропсами</h1>
-      <ClickCounterWithCounterAndProps message="Счетчик кликов:" />
-      <ClickCounterWithCounterAndProps message="Счетчик новых кликов:" />
-    </div>
-  );
-};
+// const App = () => {
+//   return (
+//     <div>
+//       <h1>Пример использования НОС с другими пропсами</h1>
+//       <ClickCounterWithCounterAndProps message="Счетчик кликов:" />
+//       <ClickCounterWithCounterAndProps message="Счетчик новых кликов:" />
+//     </div>
+//   );
+// };
 
 
 
@@ -481,12 +486,12 @@ const App = () => {
 
 
 // для примера Redux с файлами Counter.js и store.js
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Counter />
-    </Provider>
-  )
-};
+// const App = () => {
+//   return (
+//     <Provider store={store}>
+//       <Counter />
+//     </Provider>
+//   )
+// };
 
 export default App;
