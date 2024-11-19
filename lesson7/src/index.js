@@ -16,16 +16,16 @@ import dataReducer from './dataReducer';
 
 // Example 1
 // Это промежуточное ПО для демонстрации доп.эффектов
-// const middleware = store => next => action => {
-//   console.log('Доп. эффект');
+const middleware = store => next => action => {
+  console.log('Доп. эффект');
 
-//   setTimeout(() => {
-//     console.log('тайм-ауты, вызовы api и др.');
-//   }, 1000);
+  setTimeout(() => {
+    console.log('тайм-ауты, вызовы api и др.');
+  }, 1000);
 
-//   return next(action);
-//   // Т.о. сперва console.log, dispatch(), setTimeout отработают друг за другом
-// };
+  return next(action);
+  // Т.о. сперва console.log, dispatch(), setTimeout отработают друг за другом
+};
 
 // Example 2
 // Это logger middleware, который выводит действия, отправленные в store
@@ -38,25 +38,49 @@ const loggerMiddleware = store => next => action => {
 
 // Example 3
 // Создаем middleware для Redux-Saga
+const sagaMiddleware = createSagaMiddleware();
 
+// Конфигурация для redux-persist
+const persistConfig = {
+  key: 'root', // Ключ, по которому хранится состояние в storage
+  storage, // объект storage для хранения 
+};
 
-// EX Saga
-const sagaMiddleware = configureStore({
-  reducer: {
-    ...rootReducer,
-    data: dataReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware,
-    loggerMiddleware, asyncMiddleware, thunk, sagaMiddleware), // указываем через запятую ex1, ex2, ex3 ...
+// Создаем "персистентный" редьюсер с использованием persistReducer и конфигурации
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// Настраиваем store с персистентным редьюсером и всеми middleware
+const store = configureStore({
+  reducer: persistedReducer, // используем персистентный редьюсер
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST'], // игнорируем действие 'persist/PERSIST', 
+      // т.к. оно не сериализуемо
+    },
+  }).concat(middleware, loggerMiddleware, asyncMiddleware, thunk, sagaMiddleware),
 });
 
 // Запускаем нашу сагу
 sagaMiddleware.run(mySaga);
-// Presist
 
+// Инициализируем persistor, который будет использоваться для сохранения/восстановления состояния
+let persistor = persistStore(store);
+
+// Оборачиваем наше приложение в  Provider и PersistGаte для предоставления store и persistor
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>{/*Подключаем PersistGate с persistor */}
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElemetnById('root')
 )
+
+// Presist
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   document.getElemetnById('root')
+// )
