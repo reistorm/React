@@ -15,6 +15,7 @@ function Message(props) {
     <div className="Message">
        <header className="Message-header">My First React App</header>
        <h3 className="Message-h3">Hello, {props.name}</h3>
+       <p>На большее просто нет времени</p>
      </div>
   )
 }
